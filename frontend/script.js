@@ -257,6 +257,14 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
+document.querySelectorAll('.service-card').forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(40px)';
+    card.style.transition = 'all 0.6s ease';
+    observer.observe(card);
+});
+
+
 // Observe elements for animation
 document.querySelectorAll('.benefit-card, .service-card').forEach(card => {
     card.style.opacity = '0';
@@ -279,18 +287,28 @@ window.addEventListener('scroll', () => {
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
 
-    // Animate hero elements
     const heroElements = document.querySelectorAll('.hero h1, .hero p, .hero-buttons');
-    heroElements.forEach((element, index) => {
+    heroElements.forEach((el, i) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(40px)';
         setTimeout(() => {
-            element.style.opacity = '1';
-            element.style.transform = 'translateY(0)';
-        }, index * 200);
+            el.style.transition = 'all 0.8s ease';
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+        }, i * 300);
     });
 });
 
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
+
+    document.querySelectorAll('.about-card').forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(40px)';
+    card.style.transition = 'all 0.6s ease';
+    observer.observe(card);
+});
     // Set initial styles for animated elements
     const animatedElements = document.querySelectorAll('.hero h1, .hero p, .hero-buttons');
     animatedElements.forEach(element => {
