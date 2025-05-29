@@ -191,11 +191,12 @@ document.querySelector('.contact-form').addEventListener('submit', async functio
         return;
     }
 
-    const phoneRegex = /^[0-9]{10}$/;
+    const phoneRegex = /^[1-9][0-9]{9}$/;
     if (!phoneRegex.test(phone)) {
-        showStatus('Please enter a valid 10-digit phone number start with ex - 08536', false);
+        showStatus('Please enter a valid 10-digit phone number ', false);
         return;
     }
+
 
     const formData = { name, email, phone, message };
     const submitBtn = this.querySelector('.btn-primary');
