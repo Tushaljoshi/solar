@@ -1,7 +1,7 @@
 // backend/utils/sendEmail.js
 const nodemailer = require('nodemailer');
 
-const sendEmail = async (name, email, phone, message) => {
+const sendEmail = async (name, phone, email, message) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {

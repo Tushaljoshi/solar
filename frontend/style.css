@@ -577,69 +577,34 @@ body {
 }
 
 
-/* Heading Styling */
-#why-us h2 {
+.why-us h2 {
   text-align: center;
   font-size: 2.5rem;
-  margin-bottom: 2rem; /* use rem for scalable spacing */
+  margin-bottom: 30px; /* Heading aur cards ke beech gap */
   color: #333;
 }
 
-/* Grid Container for Cards */
 .benefits-grid {
   display: flex;
-  flex-wrap: wrap; /* allow wrapping on smaller screens */
-  gap: 20px;
+  gap: 20px; /* Cards ke beech gap */
   justify-content: center;
-  padding: 0 1rem; /* some padding for smaller devices */
 }
 
-/* Individual Card Styling */
 .benefit-card {
   background: #f9f9f9;
-  padding: 1.25rem;
+  padding: 20px;
   border-radius: 8px;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
-  margin-bottom: 2rem;
-  width: 100%;
-  max-width: 250px; /* maintain max width but allow shrinking */
-  box-sizing: border-box;
+  margin-bottom: 50px;
+  width: 250px; /* fixed width for uniform cards */
 }
 
-/* Hover Effect */
 .benefit-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 8px 15px rgba(0,0,0,0.2);
 }
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  #why-us h2 {
-    font-size: 2rem;
-  }
-
-  .benefit-card {
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  #why-us h2 {
-    font-size: 1.75rem;
-  }
-
-  .benefits-grid {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .benefit-card {
-    width: 90%;
-  }
-}
-
 
 /* Contact Section */
 .contact {

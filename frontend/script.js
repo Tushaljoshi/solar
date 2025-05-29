@@ -169,27 +169,35 @@ function animateCounter(element, target, duration = 2000) {
 document.querySelector('.contact-form').addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    // Get form data
     const name = this.querySelector('input[type="text"]').value.trim();
     const email = this.querySelector('input[type="email"]').value.trim();
     const phone = this.querySelector('input[type="tel"]').value.trim();
     const message = this.querySelector('textarea').value.trim();
 
-    // Basic validation
+    const statusDiv = this.querySelector('#form-status');
+    function showStatus(msg, success = true) {
+        statusDiv.textContent = msg;
+        statusDiv.style.color = success ? 'green' : 'red';
+    }
+
     if (!name || !email || !phone || !message) {
-        alert('All fields are required');
+        showStatus('All fields are required', false);
         return;
     }
 
-    // Optional: email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-        alert('Please enter a valid email address');
+        showStatus('Please enter a valid email address', false);
+        return;
+    }
+
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(phone)) {
+        showStatus('Please enter a valid 10-digit phone number', false);
         return;
     }
 
     const formData = { name, email, phone, message };
-
     const submitBtn = this.querySelector('.btn-primary');
     const originalText = submitBtn.textContent;
 
@@ -197,32 +205,29 @@ document.querySelector('.contact-form').addEventListener('submit', async functio
     submitBtn.disabled = true;
 
     try {
-        const res = fetch("https://soluris-backend.onrender.com/api/contact", {
-            method: "POST",
-            body: JSON.stringify(formDacd),
-            headers: {
-                "Content-Type": "application/json",
-            },
+        const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
         });
-
 
         let result;
         try {
             result = await res.json();
         } catch (jsonErr) {
-            alert('Unexpected response from server.');
+            showStatus('Unexpected response from server.', false);
             return;
         }
 
         if (res.ok) {
-            alert(result.message || 'Thank you! We will contact you shortly.');
+            showStatus(result.message || 'Thank you! We will contact you shortly.', true);
             this.reset();
         } else {
-            alert(result.error || 'Something went wrong. Please try again later.');
+            showStatus(result.error || 'Something went wrong. Please try again later.', false);
         }
     } catch (err) {
         console.error('Fetch error:', err);
-        alert('Network error. Please try again.');
+        showStatus('Network error. Please try again.', false);
     } finally {
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
