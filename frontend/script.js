@@ -174,7 +174,7 @@ document.querySelector('.contact-form').addEventListener('submit', async functio
     const phone = this.querySelector('input[type="tel"]').value.trim();
     const message = this.querySelector('textarea').value.trim();
 
-    const statusDiv = document.getElementById('form-status');
+    const statusDiv = document.getElementById('form-status');;
     function showStatus(msg, success = true) {
         statusDiv.textContent = msg;
         statusDiv.style.color = success ? 'green' : 'red';
@@ -191,9 +191,9 @@ document.querySelector('.contact-form').addEventListener('submit', async functio
         return;
     }
 
-    const phoneRegex = /^[0-9]$/;
+    const phoneRegex = /^[0-9]{10}$/;
     if (!phoneRegex.test(phone)) {
-        showStatus('Please enter a valid 9-digit phone number', false);
+        showStatus('Please enter a valid 10-digit phone number start with ex - 08536', false);
         return;
     }
 
