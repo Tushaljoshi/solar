@@ -193,7 +193,7 @@ document.querySelector('.contact-form').addEventListener('submit', async functio
 
     const phoneRegex = /^[1-9][0-9]{9}$/;
     if (!phoneRegex.test(phone)) {
-        showStatus('Please enter a valid 10-digit phone number ', false);
+        showStatus('Please enter a valid 9-digit phone number ', false);
         return;
     }
 
