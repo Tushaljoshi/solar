@@ -197,11 +197,14 @@ document.querySelector('.contact-form').addEventListener('submit', async functio
     submitBtn.disabled = true;
 
     try {
-        const res = await fetch('http://localhost:5000/api/contact', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
+        const res = fetch("https://soluris-backend.onrender.com/api/contact", {
+            method: "POST",
+            body: JSON.stringify(formDacd),
+            headers: {
+                "Content-Type": "application/json",
+            },
         });
+
 
         let result;
         try {
@@ -304,11 +307,11 @@ window.addEventListener('load', () => {
 document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.about-card').forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(40px)';
-    card.style.transition = 'all 0.6s ease';
-    observer.observe(card);
-});
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(40px)';
+        card.style.transition = 'all 0.6s ease';
+        observer.observe(card);
+    });
     // Set initial styles for animated elements
     const animatedElements = document.querySelectorAll('.hero h1, .hero p, .hero-buttons');
     animatedElements.forEach(element => {

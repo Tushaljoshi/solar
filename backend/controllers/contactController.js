@@ -9,14 +9,14 @@ exports.submitContactForm = async (req, res) => {
   const entryName = process.env.GOOGLE_ENTRY_NAME;
   const entryEmail = process.env.GOOGLE_ENTRY_EMAIL;
   const entryPhone = process.env.GOOGLE_ENTRY_PHONE;
-  const entryMessage = process.env.GOOGLE_ENTRY_MESSAGE;
+  const entryCompany = process.env.GOOGLE_ENTRY_MESSAGE;
   
 
   const formData = new URLSearchParams();
   formData.append(entryName, name);
   formData.append(entryEmail, email);
   formData.append(entryPhone, phone);
-  formData.append(entryMessage, message);
+  formData.append(entryCompany, message);
 
   try {
     await axios.post(googleFormUrl, formData);
