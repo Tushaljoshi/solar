@@ -859,6 +859,7 @@ body {
 @media (max-width: 768px) {
     .hamburger {
         display: flex;
+        padding-right: 70px;
     }
     
     .nav-menu {
