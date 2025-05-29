@@ -174,7 +174,7 @@ document.querySelector('.contact-form').addEventListener('submit', async functio
     const phone = this.querySelector('input[type="tel"]').value.trim();
     const message = this.querySelector('textarea').value.trim();
 
-    const statusDiv = this.querySelector('#form-status');
+    const statusDiv = document.getElementById('form-status');
     function showStatus(msg, success = true) {
         statusDiv.textContent = msg;
         statusDiv.style.color = success ? 'green' : 'red';
