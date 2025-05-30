@@ -1,38 +1,28 @@
 // === server.js ===
-require('dotenv').config(); // ✅ Load environment variables first
-
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-
+const dotenv = require('dotenv');
 const contactRoutes = require('./routes/contactRoutes');
 
+dotenv.config();
 const app = express();
 
-// === Middleware ===
+// Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); // For form submissions
+app.use(express.urlencoded({ extended: true })); // ✅ Added to parse form submissions
 
-// === Serve static frontend files ===
+// Serve static frontend files
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-// === API Routes ===
+// Use contact form API
 app.use('/api/contact', contactRoutes);
 
-// === Fallback for SPA Routing (e.g., React/HTML5 History API) ===
+// Fallback for SPA routing
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
 });
 
-// === Global Error Handler (Optional but useful) ===
-app.use((err, req, res, next) => {
-  console.error('💥 Server Error:', err.stack);
-  res.status(500).json({ error: 'Something went wrong!' });
-});
-
-// === Start Server ===
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

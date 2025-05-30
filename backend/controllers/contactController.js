@@ -1,7 +1,6 @@
 // === contactController.js ===
 const axios = require('axios');
 const sendEmail = require('../utils/sendEmail');
-const sendWhatsAppMessage = require('../utils/sendWhatsAppMessage');
 
 exports.submitContactForm = async (req, res) => {
   const { name, email, phone, message } = req.body;
@@ -29,13 +28,7 @@ exports.submitContactForm = async (req, res) => {
     // Send confirmation email
     await sendEmail(name, phone, email, message);
 
-    // Send WhatsApp message
-    if (phone) {
-      await sendWhatsAppMessage(name, phone);
-    }
-
     res.status(200).json({ message: 'Submission successful' });
-    whatsappJoinLink: 'https://wa.me/14155238886?text=join%20sunsandbox'
   } catch (error) {
     console.error('❌ Submission error:', error.message, error.response?.data);
     res.status(500).json({ message: 'Submission failed', error: error.message });
