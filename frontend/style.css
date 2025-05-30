@@ -979,3 +979,24 @@ body {
     color: #555;
     line-height: 1.5;
 }
+
+.whatsapp-join-btn {
+  display: inline-block;
+  background-color: #6dbb4c;
+  color: white;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 24px;
+  text-decoration: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 4px 8px rgba(37, 211, 102, 0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.whatsapp-join-btn:hover,
+.whatsapp-join-btn:focus {
+  background-color:#6dbb4c;
+  box-shadow: 0 6px 12px rgba(30, 190, 87, 0.6);
+  outline: none;
+  cursor: pointer;
+}

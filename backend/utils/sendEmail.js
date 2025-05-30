@@ -1,6 +1,5 @@
 // backend/utils/sendEmail.js
 const nodemailer = require('nodemailer');
-
 const sendEmail = async (name, phone, email, message) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -35,5 +34,4 @@ const sendEmail = async (name, phone, email, message) => {
     throw emailErr;
   }
 };
-
 module.exports = sendEmail;

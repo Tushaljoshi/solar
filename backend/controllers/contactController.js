@@ -1,7 +1,7 @@
 // === contactController.js ===
 const axios = require('axios');
 const sendEmail = require('../utils/sendEmail');
-const twilio = require('twilio');
+const sendWhatsAppMessage = require('../utils/sendWhatsAppMessage');
 
 exports.submitContactForm = async (req, res) => {
   const { name, email, phone, message } = req.body;
@@ -26,19 +26,16 @@ exports.submitContactForm = async (req, res) => {
     // Submit to Google Form
     await axios.post(googleFormUrl, formData);
 
-    // Send confirmation email to company and user
+    // Send confirmation email
     await sendEmail(name, phone, email, message);
 
-    // ✅ Send WhatsApp confirmation message
-    const client = twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH_TOKEN);
-    await client.messages.create({
-      from: 'whatsapp:+14155238886', // Twilio sandbox number
-      to: `whatsapp:+91${phone}`,
-      body: `Hello ${name}, 👋tushar this whatsapp Message is working \n\nThanks for contacting *SunTech Power Corporation*! 🌞\n\nWe've received your request and will get back to you within 24 hours.\n\n- Team SunTech`
-
-    });
+    // Send WhatsApp message
+    if (phone) {
+      await sendWhatsAppMessage(name, phone);
+    }
 
     res.status(200).json({ message: 'Submission successful' });
+    whatsappJoinLink: 'https://wa.me/14155238886?text=join%20sunsandbox'
   } catch (error) {
     console.error('❌ Submission error:', error.message, error.response?.data);
     res.status(500).json({ message: 'Submission failed', error: error.message });
