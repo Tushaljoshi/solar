@@ -9,17 +9,30 @@ const sendEmail = async (name, phone, email, message) => {
       pass: process.env.EMAIL_PASSWORD,
     },
   });
-  try {
-    await transporter.sendMail({
+
+  const mailOptions = [
+    {
       from: process.env.COMPANY_EMAIL,
-      to: process.env.COMPANY_EMAIL,
+      to: process.env.COMPANY_EMAIL, // Your inbox
       subject: 'New Contact Form Submission',
       text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`,
-    });
-    console.log('Email sent successfully');
+    },
+    {
+      from: process.env.COMPANY_EMAIL,
+      to: email, // User's inbox
+      subject: 'Thanks for contacting SunTech!',
+      text: `Hi ${name},\n\nThanks for reaching out to us.\n\nYour request has been registered, and someone from our team will contact you shortly.\n\nBest,\nSunTech Power Corporation`,
+    }
+  ];
+
+  try {
+    for (const mail of mailOptions) {
+      await transporter.sendMail(mail);
+    }
+    console.log('✅ Emails sent to company and user');
   } catch (emailErr) {
-    console.error('Email sending failed:', emailErr);
-    throw emailErr; // Rethrow so it gets caught in controller
+    console.error('❌ Email sending failed:', emailErr);
+    throw emailErr;
   }
 };
 
