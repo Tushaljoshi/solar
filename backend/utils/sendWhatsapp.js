@@ -22,7 +22,7 @@ const sendWhatsappMessage = async (phone, name) => {
   try {
     const formattedPhone = formatIndianPhone(phone);
 
-    const response = await axios.post(`https://api.ultramsg.com/${instanceId}/messages/chat`, null, {
+    const response = await axios.post(`https://api.ultramsg.com/instance123094/messages/chat`, null, {
       params: {
         token,
         to: formattedPhone,
