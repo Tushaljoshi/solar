@@ -1,6 +1,8 @@
 // === contactController.js ===
 const axios = require('axios');
 const sendEmail = require('../utils/sendEmail');
+const sendWhatsappMessage = require('../utils/sendWhatsapp');
+
 
 exports.submitContactForm = async (req, res) => {
   const { name, email, phone, message } = req.body;
@@ -27,6 +29,11 @@ exports.submitContactForm = async (req, res) => {
 
     // Send confirmation email
     await sendEmail(name, phone, email, message);
+
+    // Send WhatsApp confirmation
+    if (phone) {
+      await sendWhatsappMessage(phone, name);
+    }
 
     res.status(200).json({ message: 'Submission successful' });
   } catch (error) {
